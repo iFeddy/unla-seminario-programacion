@@ -7,8 +7,8 @@ from datetime import date
 
 from sys import exit
 
-HEIGHT = 1280
-WIDTH = 720
+HEIGHT = 720
+WIDTH = 1280
 class menuScore:
 
     def __init__(self):
@@ -38,9 +38,9 @@ class menuScore:
         self.tamaño=(0,0)
 
         pygame.display.set_caption('Fin - Seminario de Lenguajes - Laberinto')
-        self.screen = pygame.display.set_mode((HEIGHT, WIDTH))
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.flip()
-        self.menu = pygame_menu.Menu('Juego Finalizado', HEIGHT, WIDTH,
+        self.menu = pygame_menu.Menu('Juego Finalizado', WIDTH, HEIGHT,
                         theme=pygame_menu.themes.THEME_DARK)       
         
         

@@ -1,13 +1,14 @@
 import pygame
-HEIGHT = 1280
-WIDTH = 720
+import math
+HEIGHT = 720
+WIDTH = 1280
 
 class Player(pygame.sprite.Sprite):
     
-    def __init__(self, x, y):
+    def __init__(self, x, y, tileWidth, tileHeight):
         super().__init__()
         self.image = pygame.image.load("assets/unla.jpg").convert()
-        self.image = pygame.transform.scale(self.image, (10,10))
+        self.image = pygame.transform.scale(self.image, (math.floor(tileWidth * 0.75),math.floor(tileHeight * 0.75)))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -20,8 +21,8 @@ class Player(pygame.sprite.Sprite):
     
     def move_right(self):
         self.rect.x += self.speed
-        if self.rect.x > (HEIGHT - self.rect.width):
-            self.rect.x = HEIGHT - self.rect.width
+        if self.rect.x > (WIDTH - self.rect.width):
+            self.rect.x = WIDTH - self.rect.width
     
     def move_up(self):
         self.rect.y -= self.speed
@@ -30,8 +31,8 @@ class Player(pygame.sprite.Sprite):
     
     def move_down(self):
         self.rect.y += self.speed
-        if self.rect.y > (WIDTH - self.rect.height):
-            self.rect.y = WIDTH - self.rect.height
+        if self.rect.y > (HEIGHT - self.rect.height):
+            self.rect.y = HEIGHT - self.rect.height
     
     def stop(self):
         pass
