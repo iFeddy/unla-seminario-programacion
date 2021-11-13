@@ -39,6 +39,9 @@ class Level:
 
     def start(self):
         pygame.init()
+        pygame.mixer.music.load('assets/level.wav')
+        pygame.mixer.music.play()  
+
         pygame.display.set_caption('Nivel ' + str(self.level))
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.screen_rect = self.screen.get_rect()
@@ -140,7 +143,7 @@ class Level:
             self.salida_group.clear(self.screen,self.background)
             self.salida_group.draw(self.screen)
 
-            self.tiempo += self.clock.tick()/100
+            self.tiempo += self.clock.tick()/200
               
             contador = pygame.font.SysFont("Tahoma", 32, bold=False, italic=False).render("Tiempo: "+ str(self.tiempo).split('.', 1)[0], 1, (255, 255, 255))
             self.screen.blit(contador, (0, 0))

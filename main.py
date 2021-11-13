@@ -4,6 +4,8 @@ import pygame_menu
 from sys import exit
 
 pygame.init()
+pygame.mixer.init()
+
 HEIGHT = 720
 WIDTH = 1280
 
@@ -20,6 +22,10 @@ def start_the_game():
     pass
 
 def main():
+
+    pygame.mixer.music.load('assets/menu.wav')
+    pygame.mixer.music.play()  
+
     menu = pygame_menu.Menu('Seminario de Lenguajes - Laberinto', WIDTH, HEIGHT,
                        theme=pygame_menu.themes.THEME_DARK)
     menu.add.button('Jugar', start_the_game)

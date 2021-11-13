@@ -57,9 +57,10 @@ class configLevel:
         self.menu = pygame_menu.Menu('Configuracion de nivel', WIDTH, HEIGHT,
                         theme=pygame_menu.themes.THEME_DARK,columns=1,rows=3)
         
-        self.menu.add.dropselect("Dificultad: ",["1","2","3"],None,"",self.alSeleccionarDificultad,None,None,False,"Seleccion la dificultad",False)
-        self.menu.add.dropselect("Tamaño: ",["1","2","3"],None,"",self.alSeleccionarTamanio,None,None,False,"Selecciona el tamaño",False)
-        
+        self.menu.add.dropselect("Dificultad: ", [('Fácil', 0), ('Medio', 1), ('Difícil', 2)] ,None,"",self.alSeleccionarDificultad,None,None,False,"Seleccion la dificultad",False)
+        self.menu.add.dropselect("Tamaño: ",[('Pequeño', 0), ('Mediano', 1), ('Grande', 2)],None,"",self.alSeleccionarTamanio,None,None,False,"Selecciona el tamaño",False)
+                                      
+
         self.frame=self.menu.add.frame_h(300,100,padding=0)
         self.frame.pack(
             self.menu.add.button('Jugar', self.start_the_game)

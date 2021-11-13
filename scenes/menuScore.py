@@ -43,8 +43,9 @@ class menuScore:
         self.running = True
         self.tamaño = (0, 0)
 
-        print(dificultad)
-
+        pygame.mixer.music.load('assets/victory.wav')
+        pygame.mixer.music.play() 
+        
         pygame.display.set_caption('Fin - Seminario de Lenguajes - Laberinto')
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.flip()
@@ -77,7 +78,7 @@ class menuScore:
         for i in range(len(self.leaderboard)):
             if i < 5:
                 table.add_row([str(i + 1), str(self.leaderboard[i][0]),
-                               str(self.leaderboard[i][1]).split('.')[0],
+                               str(self.leaderboard[i][1]).split('.')[0]  + "s",
                                str(self.leaderboard[i][2]),
                                str(self.leaderboard[i][3])])
 
