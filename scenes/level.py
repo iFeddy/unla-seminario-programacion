@@ -35,6 +35,7 @@ class Level:
         self.auxTiempo = 1
         #score
         self.score = 0
+        self.scoreDificultad = dificultad
 
     def start(self):
         pygame.init()
@@ -206,7 +207,7 @@ class Level:
             
             if self.check_colisiones(self.player,self.salida_group)==True:
                 self.running = False
-                self.mScore.start(self.score, self.tiempo)
+                self.mScore.start(self.score, self.tiempo, self.scoreDificultad)
                 #Mensaje de ganador
             if(self.pausa.exitGame==True):
                 self.running=False  

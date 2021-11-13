@@ -9,15 +9,9 @@ import json
 
 from sys import exit
 
-<<<<<<< HEAD
 WIDTH = 1280
 HEIGHT = 720
 
-
-=======
-HEIGHT = 720
-WIDTH = 1280
->>>>>>> 9d7c692b5782e6614c4ddffb4781992e6d7b3a73
 class menuScore:
 
     def __init__(self):
@@ -33,6 +27,7 @@ class menuScore:
         self.leaderboard = []
         self.today = date.today()
         self.fileJson = os.path.join(os.getcwd() + '/leaderboards/scores.json')
+        self.dificultad = 'Fácil'
 
     def irAlMenuPrincipal(self):
         self.running = False
@@ -44,10 +39,11 @@ class menuScore:
         self.running = False
         pass
 
-    def start(self, playerScore=0, playerTime=0):
+    def start(self, playerScore=0, playerTime=0, dificultad=0):
         self.running = True
-        self.dificultad = 0
         self.tamaño = (0, 0)
+
+        print(dificultad)
 
         pygame.display.set_caption('Fin - Seminario de Lenguajes - Laberinto')
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -55,9 +51,17 @@ class menuScore:
         self.menu = pygame_menu.Menu('Juego Finalizado', WIDTH, HEIGHT,
                                      theme=pygame_menu.themes.THEME_DARK)
 
+        #switch dificultad
+        if dificultad == 25:
+            self.dificultad = 'Fácil'
+        elif dificultad == 50:
+            self.dificultad = 'Normal'
+        elif dificultad == 100:
+            self.dificultad = 'Difícil'
+
         self.get_high_scores()
 
-        self.leaderboard.append([playerScore, playerTime, self.today.strftime('%d/%m/%Y')])
+        self.leaderboard.append([playerScore, playerTime, self.dificultad, self.today.strftime('%d/%m/%Y')])
 
         self.update_high_scores()
 
@@ -67,14 +71,15 @@ class menuScore:
         table.default_row_background_color = (33, 33, 33)
         table.set_margin(0, 25)
 
-        table.add_row(['#', 'Puntaje', 'Tiempo', 'Fecha'],
+        table.add_row(['#', 'Puntaje', 'Tiempo', 'Dificultad', 'Fecha'],
                       cell_font=pygame_menu.font.FONT_OPEN_SANS_BOLD)
-        print(self.leaderboard)
+
         for i in range(len(self.leaderboard)):
             if i < 5:
                 table.add_row([str(i + 1), str(self.leaderboard[i][0]),
                                str(self.leaderboard[i][1]).split('.')[0],
-                               str(self.leaderboard[i][2])])
+                               str(self.leaderboard[i][2]),
+                               str(self.leaderboard[i][3])])
 
         self.menu.add.button('Volver a Empezar', self.irAlMenuPrincipal)
 
