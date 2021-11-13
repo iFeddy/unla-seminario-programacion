@@ -23,14 +23,14 @@ class configLevel:
 
     def start_the_game(self):
         if(self.dificultad>0 and self.tamaño!=(0,0)):
-            self.level = Level(self.dificultad,self.tamaño)
+            self.level = Level(int(self.dificultad*self.tamaño[0] * (self.tamaño[0]/45)),self.tamaño)
             self.level.start()
         pass
     def alSeleccionarDificultad(self,p1,*args,**arvg):
         switcher = {
-                0: 25,
-                1: 50,
-                2: 100,
+                0: 1,
+                1: 1.5,
+                2: 2,
             }
         if(bool):
             self.dificultad=switcher.get(p1[1])

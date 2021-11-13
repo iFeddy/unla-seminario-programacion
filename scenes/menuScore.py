@@ -53,11 +53,11 @@ class menuScore:
                                      theme=pygame_menu.themes.THEME_DARK)
 
         #switch dificultad
-        if dificultad == 25:
+        if dificultad == 1:
             self.dificultad = 'Fácil'
-        elif dificultad == 50:
+        elif dificultad == 1.5:
             self.dificultad = 'Normal'
-        elif dificultad == 100:
+        elif dificultad == 2:
             self.dificultad = 'Difícil'
 
         self.get_high_scores()
