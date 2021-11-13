@@ -13,7 +13,6 @@ pygame.display.set_caption("Seminario de Lenguajes - Laberinto")
 pygame.display.set_icon(pygame.image.load('assets/gamepad.png'))
 clock = pygame.time.Clock()
 
-
 def start_the_game():
     # Poner el primer nivel aca
     level = configLevel()

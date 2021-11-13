@@ -2,6 +2,7 @@ from salida import Salida
 from player import Player
 from Pared import Pared
 from scenes.menuPausa import menuPausa
+from scenes.menuScore import menuScore
 from salida import Salida
 from Theseus import Maze
 from Theseus import MazeFrontend
@@ -11,6 +12,7 @@ from pygame import time
 from pygame.color import *
 from pygame.gfxdraw import *
 import random
+
 HEIGHT = 1280
 WIDTH = 720
 
@@ -26,6 +28,12 @@ class Level:
         self.tamaño=tamaño
         self.exitGame=False
         self.pausa=menuPausa();
+        self.mScore=menuScore();
+        #contador de tiempo
+        self.tiempo = 0
+        self.auxTiempo = 1
+        #score
+        self.score = 0
 
     def start(self):
         pygame.init()
@@ -61,7 +69,7 @@ class Level:
             colisiones=self.check_colisiones(self.player,self.paredes_group)
         #self.player.rect.center = self.screen_rect.center
         self.player.update()
-        self.jugador_group.add(self.player)
+        self.jugador_group.add(self.player)       
         
         colisiones=True;
         distancia=True
@@ -127,6 +135,14 @@ class Level:
             self.salida_group.clear(self.screen,self.background)
             self.salida_group.draw(self.screen)
 
+            self.tiempo += self.clock.tick()/100
+              
+            contador = pygame.font.SysFont("Tahoma", 32, bold=False, italic=False).render("Tiempo: "+ str(self.tiempo).split('.', 1)[0], 1, (255, 255, 255))
+            self.screen.blit(contador, (0, 0))
+
+            contadorScore = pygame.font.SysFont("Tahoma", 32, bold=False, italic=False).render("Puntaje: "+ str(self.score), 1, (255, 255, 255))
+            self.screen.blit(contadorScore, (0, 30))
+
             pygame.display.update()
             self.clock.tick(60)
 
@@ -158,26 +174,35 @@ class Level:
                 #Si hay colision vuelve a la ubicacion anterior
                 if self.check_colisiones(self.player,self.paredes_group)==True:
                     self.player.move_left()
+                else:
+                    self.score += 1
             if self.a_key_down:
                 self.player.move_left()
                 #Si hay colision vuelve a la ubicacion anterior
                 if self.check_colisiones(self.player,self.paredes_group)==True:
                     self.player.move_right()
+                else:
+                    self.score += 1
             if self.w_key_down:
                 self.player.move_up()
                 #Si hay colision vuelve a la ubicacion anterior
                 if self.check_colisiones(self.player,self.paredes_group)==True:
                     self.player.move_down()
+                else:
+                    self.score += 1
             if self.s_key_down:
                 self.player.move_down()
                 #Si hay colision vuelve a la ubicacion anterior
                 if self.check_colisiones(self.player,self.paredes_group)==True:
                     self.player.move_up()
+                else:
+                    self.score += 1
             if not self.d_key_down and not self.a_key_down and not self.w_key_down and not self.s_key_down:
                 self.player.stop()
             
             if self.check_colisiones(self.player,self.salida_group)==True:
                 self.running = False
+                self.mScore.start(self.score, self.tiempo)
                 #Mensaje de ganador
             if(self.pausa.exitGame==True):
                 self.running=False  
