@@ -9,10 +9,15 @@ import json
 
 from sys import exit
 
+<<<<<<< HEAD
 WIDTH = 1280
 HEIGHT = 720
 
 
+=======
+HEIGHT = 720
+WIDTH = 1280
+>>>>>>> 9d7c692b5782e6614c4ddffb4781992e6d7b3a73
 class menuScore:
 
     def __init__(self):

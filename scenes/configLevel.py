@@ -7,8 +7,8 @@ from pygame_menu.locals import *
 from sys import exit
 
 
-HEIGHT = 1280
-WIDTH = 720
+HEIGHT = 720
+WIDTH = 1280
 class configLevel:
 
 
@@ -37,9 +37,9 @@ class configLevel:
         pass
     def alSeleccionarTamanio(self,p1,*args,**arvg):
         switcher = {
-            0: (45,25),
-            1: (65,35),
-            2: (85,43),
+            0: (45,23),
+            1: (65,33),
+            2: (79,39),
         }
         if(bool):
             self.tamaño=switcher.get(p1[1])
@@ -52,13 +52,13 @@ class configLevel:
         self.tamaño=(0,0)
 
         pygame.display.set_caption('Configuracion de nivel ')
-        self.screen = pygame.display.set_mode((HEIGHT, WIDTH))
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.flip()
-        self.menu = pygame_menu.Menu('Configuracion de nivel', HEIGHT, WIDTH,
+        self.menu = pygame_menu.Menu('Configuracion de nivel', WIDTH, HEIGHT,
                         theme=pygame_menu.themes.THEME_DARK,columns=1,rows=3)
         
-        self.menu.add.dropselect("Dificultad: ",["1","2","3"],None,"",self.alSeleccionarDificultad,None,None,False,"Seleccion la dificultad")
-        self.menu.add.dropselect("Tamaño: ",["1","2","3"],None,"",self.alSeleccionarTamanio,None,None,False,"Selecciona el tamaño",tab_size=10)
+        self.menu.add.dropselect("Dificultad: ",["1","2","3"],None,"",self.alSeleccionarDificultad,None,None,False,"Seleccion la dificultad",False)
+        self.menu.add.dropselect("Tamaño: ",["1","2","3"],None,"",self.alSeleccionarTamanio,None,None,False,"Selecciona el tamaño",False)
         
         self.frame=self.menu.add.frame_h(300,100,padding=0)
         self.frame.pack(

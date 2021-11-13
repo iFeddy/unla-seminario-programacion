@@ -12,9 +12,10 @@ from pygame import time
 from pygame.color import *
 from pygame.gfxdraw import *
 import random
+import math
 
-HEIGHT = 1280
-WIDTH = 720
+HEIGHT = 720
+WIDTH = 1280
 
 class Level:
     def __init__(self,dificultad,tamaño):
@@ -38,11 +39,11 @@ class Level:
     def start(self):
         pygame.init()
         pygame.display.set_caption('Nivel ' + str(self.level))
-        self.screen = pygame.display.set_mode((HEIGHT, WIDTH))
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.screen_rect = self.screen.get_rect()
         pygame.display.flip()
         self.running = True
-        self.background = pygame.Surface((HEIGHT, WIDTH))
+        self.background = pygame.Surface((WIDTH, HEIGHT))
         self.crear_laverinto()    
         self.crear_jugador_salida()           
         self.level_loop()      
@@ -65,7 +66,7 @@ class Level:
         colisiones=True;
         while(colisiones==True):
             xyRandom=self.posicion_aleatoria()
-            self.player = Player(xyRandom[0],xyRandom[1])
+            self.player = Player(xyRandom[0],xyRandom[1], self.tileWidth, self.tileHeight)
             colisiones=self.check_colisiones(self.player,self.paredes_group)
         #self.player.rect.center = self.screen_rect.center
         self.player.update()
@@ -92,8 +93,11 @@ class Level:
     def crear_laverinto(self):
         self.laberinto = Maze(self.tamaño[0],self.tamaño[1],1,1)
         self.laberinto.generateMaze(1,1, 10)
-        self.tileHeight = 15
-        self.tileWidth = 15
+        print(self.tamaño[0])
+        self.tileHeight = math.floor(WIDTH / self.tamaño[0])
+        self.tileWidth = math.floor(WIDTH / self.tamaño[0])
+        #self.tileHeight = 16
+        #self.tileWidth = 16
         self.labTop = 80
         self.labLeft = 0
         self.dibujar_laberinto(self.laberinto)

@@ -7,8 +7,8 @@ from pygame_menu.events import *
 from sys import exit
 
 
-HEIGHT = 1280
-WIDTH = 720
+HEIGHT = 720
+WIDTH = 1280
 class menuPausa:
 
     def __init__(self):
@@ -34,9 +34,9 @@ class menuPausa:
         self.tamaño=(0,0)
 
         pygame.display.set_caption('Menu pausa')
-        self.screen = pygame.display.set_mode((HEIGHT, WIDTH))
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.flip()
-        self.menu = pygame_menu.Menu('Menu pausa', HEIGHT, WIDTH,
+        self.menu = pygame_menu.Menu('Menu pausa', WIDTH, HEIGHT,
                         theme=pygame_menu.themes.THEME_DARK)
         self.menu.add.button('Continuar',self.continuarPartida)
         self.menu.add.button('Salir al menu principal',self.irAlMenuPrincipal)
